@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       db:
-        image: postgres:12.9
+        image: postgres:11
         ports: ["5432:5432"]
         options: >-
           --health-cmd pg_isready
@@ -27,40 +27,15 @@ jobs:
         with:
           cmd: install
       - name: Build and run tests
-      #   run: |
-      #     sudo apt-get -yqq install libpq-dev build-essential libcurl4-openssl-dev
-      #     gem install bundler
-      #     bundle install --jobs 4 --retry 3
-      #     yarn install
-      # - name: Setup test database
         env:
           DATABASE_URL: postgres://postgres:@localhost:5432/test
           REDIS_URL: redis://localhost:6379/0
           RAILS_ENV: test
           RAILS_MASTER_KEY: ${{secrets.RAILS_MASTER_KEY}}
           POSTGRES_PASSWORD: postgres
-          # PGHOST: localhost
-          # POSTGRES_DB: rails_github_actions_test
-          # POSTGRES_USER: rails_github_actions
-          # POSTGRES_PASSWORD: postgres
         run: |
           sudo apt-get -yqq install libpq-dev
           gem install bundler
           bundle install --jobs 4 --retry 3
           bundle exec rails db:prepare
           bundle exec rails test
-          
-          #cp config/secrets.yml
-
-          # cp config/database.ci.yml config/database.yml
-          # rake db:create db:migrate
-
-      # - name: Run tests
-      #   env:
-      #     PGHOST: localhost
-      #     POSTGRES_DB: rails_github_actions_test
-      #     POSTGRES_USER: rails_github_actions
-      #     POSTGRES_PASSWORD: postgres
-      #     PGPORT: ${{ job.services.postgres.ports[5432] }}
-      #     RAILS_ENV: test
-      #   run: rspec
