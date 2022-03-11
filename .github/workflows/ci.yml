@@ -1,9 +1,13 @@
 name: CI
 on: 
-  push:
-    branches: [main]
   pull_request:
-    branches: [main]
+  push:
+    branches-ignore:
+    - v1
+    tags-ignore:
+    - '*'
+    paths-ignore:
+    - README.md
   workflow_dispatch:
 
 

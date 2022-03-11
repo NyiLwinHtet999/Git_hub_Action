@@ -8,6 +8,19 @@ gem 'rails', '~> 6.1.4', '>= 6.1.4.7'
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3', '~> 1.4'
 gem 'pg', '>= 0.18', '< 2.0'
+gem 'mysql2'
+
+gem 'sidekiq'
+gem 'redis'
+gem 'redis-namespace'
+gem 'redis-rails'
+gem "rufus-scheduler"
+#rest client 
+gem 'rest-client'
+#pagination 
+gem "kaminari"
+#gem 'aws-sdk', '~> 3'
+gem 'aws-sdk-s3', '~> 1'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
