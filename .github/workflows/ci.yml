@@ -46,6 +46,11 @@ jobs:
           gem install bundler
           bundle install --jobs 4 --retry 3
           yarn install
+      - name: Run bundle install
+        working-directory: ${{env.api-dir}}
+        run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3
       - name: Setup test database
         env:
           RAILS_ENV: test
